@@ -20,5 +20,5 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-connect');
 
-  return grunt.registerTask('default', [ "connect" ]);
+  return grunt.registerTask('server', [ "connect" ]);
 };
