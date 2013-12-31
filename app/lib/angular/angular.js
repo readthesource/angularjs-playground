@@ -20274,6 +20274,7 @@ var styleDirective = valueFn({
   publishExternalAPI(angular);
 
   jqLite(document).ready(function() {
+    debugger;
     angularInit(document, bootstrap);
   });
 
