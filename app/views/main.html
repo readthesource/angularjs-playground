@@ -1,24 +1,49 @@
 <div class="jumbotron">
-  <h1>
-    AngularJS Playground
-  </h1>
-  <p>This app is a playground for exploring the internals of AngularJS. Its Git repository includes branches that focus on different aspects of the source code. Each branch has debugger statements included in the source at helpful starting points. </p>
+
+
+  <!--EXAMPLE DIRECTIVE FOR TRIGGERING $compile-->
+
+  <greeting name="Solid Spherical Mass Orbiting Luminous Gravitating Plasma" ng-transclude>
+    <h2><small>It's a pleasure to meet you...</small></h2>
+  </greeting>
+
 </div>
 
 <div class="row marketing">
-  <h4>Hangouts and Group Study</h4>
-  <p>
-  We hold a Google Hangout on the first Thursday of each month at 7pm Eastern time, open to all. The hangout link is tweeted a few minutes in advance. Be sure to follow <a href="https://twitter.com/readthesource">@readthesource</a>. Please join us if you'd like to participate.
-  </p>
 
-  <h4>Wiki and Issues</h4>
-  <p>
-  Between hangouts, we can use the project <a href="https://github.com/readthesource/angularjs-playground/wiki">wiki</a> to annotate pieces of code with explanations and the <a href="https://github.com/readthesource/angularjs-playground/issues">issues</a> for discussion.
-  </p>
+  <h4>Example Directive</h4>
 
-  <h4>Getting Started</h4>
-  <p>
-  Open <a href="https://developers.google.com/chrome-developer-tools/">Chrome Developer Tools</a> (option+command+j on Mac OS X) and refresh the browser. You'll be able to step through code with the <a href="https://developers.google.com/chrome-developer-tools/docs/javascript-debugging">debugger</a>.
-  </p>
+  <pre><code>
+   &lt;greeting name="Solid Spherical Mass Orbiting Luminous Gravitating Plasma" ng-transclude&gt;
+    &lt;h2&gt;&lt;small&gt;It's a pleasure to meet you...&lt;/small&gt;&lt;/h2&gt;
+  &lt;/greeting&gt;
+  </code></pre>
+
+  <pre><code>
+  angular.module('readthesource')
+  .directive('greeting', function ($compile) {
+    return {
+      restrict: 'E',
+      scope: true,
+      transclude: true,
+      template: '&lt;div class="alert" ng-transclude&gt;&lt;/div&gt;',
+      link: function (scope, element, attrs) {
+        scope.name = attrs['name'];
+        debugger;
+        var el = $compile('&lt;h3&gt;Hello, {{name}}!&lt;/h3&gt;')(scope);
+        element.prepend(el);
+      }
+    }
+  });
+  </code></pre>
+
+  <h4>compile function</h4>
+  <p><a href="https://github.com/angular/angular.js/blob/master/src/ng/compile.js#L808">https://github.com/angular/angular.js/blob/master/src/ng/compile.js#L808</a></p>
+
+  <h4>linking function</h4>
+  <p><a href="https://github.com/angular/angular.js/blob/master/src/ng/compile.js#L826">https://github.com/angular/angular.js/blob/master/src/ng/compile.js#L826</a></p>
+
+  <h4>$digest</h4>
+  <p><a href="https://github.com/angular/angular.js/blob/master/src/ng/rootScope.js#L549">https://github.com/angular/angular.js/blob/master/src/ng/rootScope.js#L549</a></p>
 </div>
 
